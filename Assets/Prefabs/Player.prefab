@@ -526,6 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
+  dashSpeed: 50
   turnSpeed: 0.1
   fireRate: 0.1
   lerpMoveSpeed: 1
