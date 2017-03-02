@@ -525,8 +525,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23cc1a8d8ee15e46b853bbdf37dabc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   moveSpeed: 16
   turnSpeed: 0.5
+=======
+  moveSpeed: 12
+  dashSpeed: 50
+  turnSpeed: 0.1
+>>>>>>> origin/master
   fireRate: 0.1
   lerpMoveSpeed: 1
   bullet: {fileID: 1520889275721594, guid: 62f3fc8c2a4cb3245979c13f60e791ff, type: 2}
