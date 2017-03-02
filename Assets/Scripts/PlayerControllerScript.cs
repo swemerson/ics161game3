@@ -3,6 +3,7 @@
 public class PlayerControllerScript : MonoBehaviour
 {
     public float moveSpeed;
+	public float dashSpeed;
     public float turnSpeed;
     public float fireRate;
     public float lerpMoveSpeed;
@@ -34,7 +35,7 @@ public class PlayerControllerScript : MonoBehaviour
         bloodSpray = GetComponent<ParticleSystem>();
         gameControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerScript>();
     }
-
+		
     void Update()
     {
         if (!isDead)
@@ -55,10 +56,18 @@ public class PlayerControllerScript : MonoBehaviour
                 shootSound.Play();
             }
 
-            // Move
+            // Move or Dash
             var moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
             moveDirection.Normalize();
-            playerTransform.position = Vector3.Lerp(playerTransform.position, playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
+
+			if (Input.GetKeyDown (KeyCode.Space)) 
+			{
+				playerTransform.position = Vector3.Lerp (playerTransform.position, playerTransform.position += moveDirection * dashSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
+			} 
+			else 
+			{
+				playerTransform.position = Vector3.Lerp(playerTransform.position, playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
+			}
         }
     }
 
