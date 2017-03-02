@@ -3,7 +3,8 @@
 public class CameraScript : MonoBehaviour
 {
     public float moveSpeed;
-    public float zoomSpeed;
+    public float mouseZoomSpeed;
+    public float controllerZoomSpeed;
     public float minHeight;
     public float maxHeight;
 
@@ -23,7 +24,9 @@ public class CameraScript : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * 6);
 
         // Zoom camera in/out
-        mainCamera.orthographicSize += -1 * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        mainCamera.orthographicSize += -1 * Input.GetAxis("Mouse ScrollWheel") * mouseZoomSpeed;
+        mainCamera.orthographicSize += Input.GetAxis("Joy Right Shoulder") * controllerZoomSpeed;
+        mainCamera.orthographicSize -= Input.GetAxis("Joy Left Shoulder") * controllerZoomSpeed;
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minHeight, maxHeight);
     }
 }

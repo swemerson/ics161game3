@@ -39,16 +39,27 @@ public class PlayerControllerScript : MonoBehaviour
     {
         if (!isDead)
         {
-            // Rotate to mouse position
-            var mousePos = Input.mousePosition;
-            var objectPos = Camera.main.WorldToScreenPoint(transform.position);
-            mousePos.x = mousePos.x - objectPos.x;
-            mousePos.y = mousePos.y - objectPos.y;
-            var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)), turnSpeed);
+            // Rotate character
+            if (Input.GetAxisRaw("Joy Right Horizontal") != 0 || Input.GetAxisRaw("Joy Right Vertical") != 0)
+            {
+                var targetX = Input.GetAxisRaw("Joy Right Horizontal");
+                var targetY = Input.GetAxisRaw("Joy Right Vertical");
+                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
+                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
+                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, rotationTarget, turnSpeed);
+            }
+            else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+            {
+                var objectPos = Camera.main.WorldToScreenPoint(playerTransform.position);
+                var targetX = Input.mousePosition.x - objectPos.x;
+                var targetY = Input.mousePosition.y - objectPos.y;
+                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
+                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
+                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, rotationTarget, turnSpeed);
+            }       
 
             // Shoot
-            if (Input.GetButton("Fire1") && Time.time > nextFire)
+            if (Input.GetAxis("Fire1") != 0 && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
                 Instantiate(bullet, bulletSpawnRight.position, bulletSpawnRight.rotation);
@@ -58,7 +69,8 @@ public class PlayerControllerScript : MonoBehaviour
             // Move
             var moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
             moveDirection.Normalize();
-            playerTransform.position = Vector3.Lerp(playerTransform.position, playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
+            var moveTarget = playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
+            playerTransform.position = Vector3.Lerp(playerTransform.position, moveTarget, lerpMoveSpeed);
         }
     }
 
