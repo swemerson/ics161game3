@@ -912,11 +912,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-<<<<<<< HEAD
   randomSeed: 1421105762
-=======
-  randomSeed: 1023244011
->>>>>>> origin/master
   InitialModule:
     serializedVersion: 3
     enabled: 1

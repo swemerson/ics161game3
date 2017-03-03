@@ -5,8 +5,7 @@ public class PlayerControllerScript : MonoBehaviour
     public float moveSpeed;
 	public float dashSpeed;
     public float turnSpeed;
-    public float fireRate;
-    public float lerpMoveSpeed;
+    public float fireInterval;
     public GameObject bullet;
 
     private float nextFire;
@@ -48,6 +47,7 @@ public class PlayerControllerScript : MonoBehaviour
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
                 var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
                 playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, rotationTarget, turnSpeed);
+                shoot();
             }
             else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
             {
@@ -60,31 +60,34 @@ public class PlayerControllerScript : MonoBehaviour
             }       
 
             // Shoot
-            if (Input.GetAxis("Fire1") != 0 && Time.time > nextFire)
+            if (Input.GetAxis("Fire1") != 0)
             {
-                nextFire = Time.time + fireRate;
-                Instantiate(bullet, bulletSpawnRight.position, bulletSpawnRight.rotation);
-                shootSound.Play();
+                shoot();
             }
 
             // Move or Dash
             var moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
             moveDirection.Normalize();
-<<<<<<< HEAD
-            var moveTarget = playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
-            playerTransform.position = Vector3.Lerp(playerTransform.position, moveTarget, lerpMoveSpeed);
-=======
 
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				playerTransform.position = Vector3.Lerp (playerTransform.position, playerTransform.position += moveDirection * dashSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
-			} 
-			else 
-			{
-				playerTransform.position = Vector3.Lerp(playerTransform.position, playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime, lerpMoveSpeed);
-			}
->>>>>>> origin/master
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                playerTransform.position += moveDirection * dashSpeed * Time.smoothDeltaTime;
+            }
+            else
+            {
+                playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
+            }
         }
+    }
+
+    void shoot()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireInterval;
+            Instantiate(bullet, bulletSpawnRight.position, bulletSpawnRight.rotation);
+            shootSound.Play();
+        }        
     }
 
     void OnCollisionEnter2D(Collision2D collision)

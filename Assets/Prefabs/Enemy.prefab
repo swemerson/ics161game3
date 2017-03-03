@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2901408e2e683d44b9c13645c05d2a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 5
   turnSpeed: 20
   bulletImpactForce: 1
   deathSpinSpeed: 1000
