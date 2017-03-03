@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4454017987947038}
+  - component: {fileID: 114504812851103920}
   - component: {fileID: 33182018955485578}
   - component: {fileID: 23262468537483484}
   - component: {fileID: 61541812797521282}
   - component: {fileID: 50609080475553792}
-  - component: {fileID: 114504812851103920}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -128,4 +128,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 40
+  bulletLifetime: 10
   isLethal: 0

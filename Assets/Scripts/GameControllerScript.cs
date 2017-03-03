@@ -1,55 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
-{
+{    
     public float enemySpawnDelay;
     public float enemySpawnInterval;
-    public float enemiesToSpawn;
-    public float enemiesToSpawnIncrease;
-    public float enemiesToSpawnIncreaseDelay;
-    public float enemiesToSpawnIncreaseInterval;
+    public float enemySpawnAmount;
+    public float increaseEnemiesDelay;
+    public float increaseEnemiesInterval;
+    public float increaseEnemiesAmount;
     public GameObject enemy;
     public GameObject floor;
 
     private int score;
     private Text scoreBox;
     private Text deathBox;
+    private GameObject[] enemySpawns;
 
 	void Start()
     {
         score = 0;
         scoreBox = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         deathBox = GameObject.FindGameObjectWithTag("Death").GetComponent<Text>();
+        enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
         deathBox.enabled = false;
-        InvokeRepeating("SpawnEnemy", enemySpawnDelay, enemySpawnInterval);
-        InvokeRepeating("IncreaseEnemies", enemiesToSpawnIncreaseDelay, enemiesToSpawnIncreaseInterval);
+        InvokeRepeating("EnemySpawn", enemySpawnDelay, enemySpawnInterval);
+        InvokeRepeating("IncreaseEnemies", increaseEnemiesDelay, increaseEnemiesInterval);
 	}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Restart"))
         {
             SceneManager.LoadScene("ics161game3");
         }
     }
 
     // Places enemies randomly in the arena
-    void SpawnEnemy()
+    void EnemySpawn()
     {
-        for (int i = 0; i < enemiesToSpawn; ++i)
+        for (int i = 0; i < enemySpawnAmount; ++i)
         {
-            float randomX = Random.Range(-1 * floor.transform.localScale.x / 2, floor.transform.localScale.x / 2);
-            float randomY = Random.Range(-1 * floor.transform.localScale.y / 2, floor.transform.localScale.y / 2);
-            Instantiate(enemy, new Vector2(randomX, randomY), Quaternion.identity);
-        }
+            // Get random spawn point and spawn enemy
+            var spawnPoint = enemySpawns[Random.Range(0, enemySpawns.Length)].transform.position;
+            Instantiate(enemy, new Vector2(spawnPoint.x, spawnPoint.y), Quaternion.identity);
+        }        
     }
 
     // Increases the number of enemies that will spawn in SpawnEnemy ()
     void IncreaseEnemies()
     {
-        enemiesToSpawn += enemiesToSpawnIncrease;
+        enemySpawnAmount += increaseEnemiesAmount;
     }
 
     // Updates the scoreboard

@@ -36,11 +36,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4564530743853204}
+  - component: {fileID: 114279981778315960}
   - component: {fileID: 33318331358702792}
   - component: {fileID: 23015715763495110}
   - component: {fileID: 50454606458531834}
   - component: {fileID: 61136794761971398}
-  - component: {fileID: 114279981778315960}
   - component: {fileID: 198173767436015512}
   - component: {fileID: 199124695872527298}
   - component: {fileID: 82745467112624944}
@@ -446,9 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2901408e2e683d44b9c13645c05d2a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  turnSpeed: 10
-  bulletImpactForce: 5
+  moveSpeed: 5
+  turnSpeed: 20
+  bulletImpactForce: 1
+  deathSpinSpeed: 1000
+  destroyDelay: 2
 --- !u!198 &198173767436015512
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -456,7 +458,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1412397783856702}
   serializedVersion: 5
-  lengthInSec: 0.5
+  lengthInSec: 2
   simulationSpeed: 1
   looping: 0
   prewarm: 0
@@ -509,7 +511,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:

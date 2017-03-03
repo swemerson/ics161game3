@@ -9,6 +9,7 @@ TagManager:
   - Score
   - Death
   - Enemy
+  - Enemy Spawn Point
   layers:
   - Default
   - TransparentFX
