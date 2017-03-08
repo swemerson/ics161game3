@@ -10,6 +10,8 @@ TagManager:
   - Death
   - Enemy
   - Enemy Spawn Point
+  - Dash Slider
+  - Dash Text
   layers:
   - Default
   - TransparentFX
