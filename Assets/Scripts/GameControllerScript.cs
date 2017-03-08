@@ -17,6 +17,8 @@ public class GameControllerScript : MonoBehaviour
     private int score;
     private Text scoreBox;
     private Text deathBox;
+	private Text dashBox;
+	private Slider dashSlider;
     private GameObject[] enemySpawns;
 
 	void Start()
@@ -24,6 +26,8 @@ public class GameControllerScript : MonoBehaviour
         score = 0;
         scoreBox = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         deathBox = GameObject.FindGameObjectWithTag("Death").GetComponent<Text>();
+		dashBox = GameObject.FindGameObjectWithTag("Dash Text").GetComponent<Text>();
+		dashSlider = GameObject.FindGameObjectWithTag("Dash Slider").GetComponent<Slider>();
         enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
         deathBox.enabled = false;
         InvokeRepeating("EnemySpawn", enemySpawnDelay, enemySpawnInterval);
@@ -74,4 +78,27 @@ public class GameControllerScript : MonoBehaviour
 
         deathBox.enabled = true;
     }
+
+	public void Dash(float dashCooldown)
+	{
+		StartCoroutine (fillDashMeter(dashCooldown));
+	}
+
+	IEnumerator fillDashMeter(float dashCooldown)
+	{
+		dashBox.color = Color.gray;
+		dashSlider.value = 0f;
+		fillDashMeter (dashCooldown);
+
+		float fillTime = 0;
+		while (fillTime < dashCooldown)
+		{
+			dashSlider.value = fillTime / dashCooldown;
+			yield return null;
+			fillTime += Time.deltaTime;
+		}
+
+		dashBox.color = Color.white;
+		dashSlider.value = 1f;
+	}
 }

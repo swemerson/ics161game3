@@ -4,12 +4,16 @@ public class PlayerControllerScript : MonoBehaviour
 {
     public float moveSpeed;
 	public float dashSpeed;
+	public float dashDuration;
+	public float dashCooldown;
     public float turnSpeed;
     public float fireInterval;
     public GameObject bullet;
 
     private float nextFire;
+	private float nextDash;
     private bool isDead;
+	private bool isDashing;
     private Transform playerTransform;    
     private Transform bulletSpawnRight;
     private AudioSource shootSound;
@@ -20,6 +24,7 @@ public class PlayerControllerScript : MonoBehaviour
     void Start()
     {
         isDead = false;
+		isDashing = false;
         playerTransform = GetComponent<Transform>();
         var childTransforms = GetComponentsInChildren<Transform> ();
         foreach (var childTransform in childTransforms)
@@ -69,14 +74,16 @@ public class PlayerControllerScript : MonoBehaviour
             var moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
             moveDirection.Normalize();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) && !isDashing && Time.time > nextDash)
             {
-                playerTransform.position += moveDirection * dashSpeed * Time.smoothDeltaTime;
+				moveSpeed += dashSpeed;
+				Invoke ("dashComplete", dashDuration);
+				isDashing = true;
+				nextDash = Time.time + dashCooldown;
+				gameControllerScript.Dash (dashCooldown);
             }
-            else
-            {
-                playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
-            }
+                
+			playerTransform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
         }
     }
 
@@ -89,6 +96,12 @@ public class PlayerControllerScript : MonoBehaviour
             shootSound.Play();
         }        
     }
+
+	void dashComplete()
+	{
+		moveSpeed -= dashSpeed;
+		isDashing = false;
+	}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
