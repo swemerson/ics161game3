@@ -4,9 +4,11 @@ public class PlayerAnimScript : MonoBehaviour {
     Animator anim;
     public float SliceAgainTime = 0.3f;
     float SliceAgainElapsed = 0.0f;
+    private AudioSource lightsaberSound;
 
 	void Start () {
-        anim = GetComponent<Animator>();	
+        anim = GetComponent<Animator>();
+        lightsaberSound = GetComponent<AudioSource>();
 	}
 	
 	void Update () {
@@ -49,5 +51,6 @@ public class PlayerAnimScript : MonoBehaviour {
         //}
 
         anim.Play("swipeUp");
+        lightsaberSound.Play();
     }
 }
