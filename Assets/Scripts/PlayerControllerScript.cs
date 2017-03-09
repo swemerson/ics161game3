@@ -156,7 +156,7 @@ public class PlayerControllerScript : MonoBehaviour
                 bloodSpray.Play();
                 isDead = true;
                 gameControllerScript.GameOver();
-            }          
+            }
         }
 
         // If ran into ammo box, collect it
