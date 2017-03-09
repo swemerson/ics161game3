@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
-    public bool useEnemySpawner;
     public float enemySpawnDelay;
     public float enemySpawnInterval;
     public float enemySpawnAmount;
@@ -34,12 +33,7 @@ public class GameControllerScript : MonoBehaviour
         ammoBox = GameObject.FindGameObjectWithTag("Ammo Text").GetComponent<Text>();
         ammoSlider = GameObject.FindGameObjectWithTag("Ammo Slider").GetComponent<Slider>();
         enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
-        deathBox.enabled = false;
-        if (useEnemySpawner)
-        {
-            InvokeRepeating("EnemySpawn", enemySpawnDelay, enemySpawnInterval);
-            InvokeRepeating("IncreaseEnemies", increaseEnemiesDelay, increaseEnemiesInterval);
-        }        
+        deathBox.enabled = false;       
 	}
 
     void Update()
@@ -50,6 +44,12 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
+    public void StartEnemySpawner()
+    {
+        InvokeRepeating("EnemySpawn", enemySpawnDelay, enemySpawnInterval);
+        InvokeRepeating("IncreaseEnemies", increaseEnemiesDelay, increaseEnemiesInterval);
+    }
+
     // Places enemies randomly in the arena
     void EnemySpawn()
     {
@@ -58,6 +58,13 @@ public class GameControllerScript : MonoBehaviour
             // Get random spawn point and spawn enemy
             var spawnPoint = enemySpawns[Random.Range(0, enemySpawns.Length)].transform.position;
             Instantiate(enemy, new Vector2(spawnPoint.x, spawnPoint.y), Quaternion.identity);
+
+            // Update enemy vision distances **** THIS IS TERRIBLE, MUST FIX!!! ****
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<EnemyScript>().visionDistance = 9999f;
+            }
         }        
     }
 

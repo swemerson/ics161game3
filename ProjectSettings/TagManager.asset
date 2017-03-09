@@ -15,6 +15,9 @@ TagManager:
   - Ammo Slider
   - Ammo Text
   - Ammo
+  - Big Enemy
+  - Boss Slider
+  - Enemy Bullet
   layers:
   - Default
   - TransparentFX

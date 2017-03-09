@@ -29,4 +29,9 @@ public class CameraScript : MonoBehaviour
         mainCamera.orthographicSize -= Input.GetAxis("Joy Left Shoulder") * controllerZoomSpeed;
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minHeight, maxHeight);
     }
+
+    public void ZoomFullOut()
+    {
+        mainCamera.orthographicSize = maxHeight;
+    }
 }

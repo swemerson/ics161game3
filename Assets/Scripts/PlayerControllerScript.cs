@@ -152,15 +152,26 @@ public class PlayerControllerScript : MonoBehaviour
             var enemyScript = collision.gameObject.GetComponent<EnemyScript>();
             if (!enemyScript.isDead)
             {
-                explosionSound.Play();
-                bloodSpray.Play();
-                isDead = true;
-                gameControllerScript.GameOver();
+                Die();
             }
         }
 
+        else if (collision.gameObject.tag == "Big Enemy")
+        {
+            var enemyScript = collision.gameObject.GetComponent<BigEnemyScript>();
+            if (!enemyScript.isDead)
+            {
+                Die();
+            }
+        }
+
+        else if (collision.gameObject.tag == "Enemy Bullet")
+        {
+            Die();
+        }
+
         // If ran into ammo box, collect it
-        if (collision.gameObject.tag == "Ammo")
+        else if (collision.gameObject.tag == "Ammo")
         {
             Destroy(collision.gameObject);
             ammoPickupSound.Play();
@@ -173,5 +184,13 @@ public class PlayerControllerScript : MonoBehaviour
 
             gameControllerScript.UpdateAmmoText(ammoStored, ammoLoaded);
         }
+    }
+
+    void Die()
+    {
+        explosionSound.Play();
+        bloodSpray.Play();
+        isDead = true;
+        gameControllerScript.GameOver();
     }
 }
