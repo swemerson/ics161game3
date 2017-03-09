@@ -2,7 +2,7 @@
 
 public class CameraScript : MonoBehaviour
 {
-    public float moveSpeed;
+    public float lerpSpeed;
     public float mouseZoomSpeed;
     public float controllerZoomSpeed;
     public float minHeight;
@@ -21,7 +21,7 @@ public class CameraScript : MonoBehaviour
     {
         // Follow the players with a delay
         var cameraTarget = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z - 10);
-        transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * 6);
+        transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * lerpSpeed);
 
         // Zoom camera in/out
         mainCamera.orthographicSize += -1 * Input.GetAxis("Mouse ScrollWheel") * mouseZoomSpeed;

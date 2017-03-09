@@ -129,4 +129,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 40
   bulletLifetime: 10
-  isLethal: 0

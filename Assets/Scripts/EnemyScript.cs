@@ -4,23 +4,26 @@ public class EnemyScript : MonoBehaviour
 {
     public float moveSpeed;
     public float turnSpeed;
-    public float bulletImpactForce;
+    public float impactForce;
     public float deathSpinSpeed;
     public float destroyDelay;
+	public float visionDistance;
+
+    [HideInInspector]
+    public bool isDead;
 
     private Transform playerTransform;
-    private Transform enemyTransform;
     private Rigidbody2D enemyRigidbody2D;
     private ParticleSystem bloodParticleSystem;
     private AudioSource hitSound;
-    private GameControllerScript gameControllerScript;
-    private bool isDead;
+    private GameControllerScript gameControllerScript;    
+	private bool isChasing;
 
 	void Start()
     {
         isDead = false;
+		isChasing = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        enemyTransform = GetComponent<Transform>();
         enemyRigidbody2D = GetComponent<Rigidbody2D>();
         bloodParticleSystem = GetComponent<ParticleSystem>();
         hitSound = GetComponent<AudioSource>();
@@ -30,17 +33,23 @@ public class EnemyScript : MonoBehaviour
 	void Update()
     {
         // Move and rotate toward the player
-        if (!isDead)
+        if (!isDead && isChasing)
         {
-            enemyTransform.position = Vector3.MoveTowards(enemyTransform.position, playerTransform.position, moveSpeed * Time.fixedDeltaTime);
-            var angle = Mathf.Atan2(playerTransform.position.y - enemyTransform.position.y, playerTransform.position.x - enemyTransform.position.x) * Mathf.Rad2Deg - 90f;
+            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.fixedDeltaTime);
+            var angle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             var rotationTarget = Quaternion.Euler(0, 0, angle);
-            enemyTransform.rotation = Quaternion.Lerp(enemyTransform.rotation, rotationTarget, Time.smoothDeltaTime * turnSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, Time.smoothDeltaTime * turnSpeed);
         }
-        else
+		else if (isDead)
         {
             transform.Rotate(Vector3.forward * deathSpinSpeed * Time.smoothDeltaTime);
-        }       
+        }      
+
+		// Did the enemy see the player? Todo: Add check for line of sight
+		else if (Vector2.Distance(transform.position, playerTransform.position) <= visionDistance)
+		{
+			isChasing = true;
+		}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +61,7 @@ public class EnemyScript : MonoBehaviour
             {
                 isDead = true;
                 bloodParticleSystem.Play();
-                enemyRigidbody2D.AddForce(collision.gameObject.transform.position * bulletImpactForce, ForceMode2D.Impulse);
+				enemyRigidbody2D.AddForce(collision.gameObject.transform.position * impactForce, ForceMode2D.Impulse);
                 hitSound.Play();
                 gameControllerScript.IncrementScore();
                 Destroy(gameObject, destroyDelay);

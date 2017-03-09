@@ -12,6 +12,9 @@ TagManager:
   - Enemy Spawn Point
   - Dash Slider
   - Dash Text
+  - Ammo Slider
+  - Ammo Text
+  - Ammo
   layers:
   - Default
   - TransparentFX
