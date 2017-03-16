@@ -1204,6 +1204,7 @@ MonoBehaviour:
   controllerZoomSpeed: 0.5
   minHeight: 20
   maxHeight: 50
+  height: 0
 --- !u!1 &306316655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,42 +1538,9 @@ Prefab:
       propertyPath: m_Name
       value: Charge Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1412397783856702, guid: 7bb6193f1e5f40f48b633b05ef97b2f7, type: 2}
-      propertyPath: m_TagString
-      value: Charge Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114279981778315960, guid: 7bb6193f1e5f40f48b633b05ef97b2f7, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bb6193f1e5f40f48b633b05ef97b2f7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &381654667 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1412397783856702, guid: 7bb6193f1e5f40f48b633b05ef97b2f7,
-    type: 2}
-  m_PrefabInternal: {fileID: 381654666}
---- !u!114 &381654668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 381654667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4458fc97d37f838498c60547b0e8ce03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  turnSpeed: 20
-  impactForce: 1
-  deathSpinSpeed: 1000
-  destroyDelay: 2
-  visionDistance: 30
-  chargeDistance: 10
-  chargeTime: 1
-  chargeCooldown: 3
-  chargeSpeed: 5
-  timeTest: 0
-  isDead: 0
 --- !u!1 &398969805
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class CameraScript : MonoBehaviour
     public float controllerZoomSpeed;
     public float minHeight;
     public float maxHeight;
+    public float height;
 
     private GameObject player1;
     private GameObject player2;
@@ -49,7 +50,7 @@ public class CameraScript : MonoBehaviour
                 
         transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * lerpSpeed);
 
-        mainCamera.orthographicSize = Vector2.Distance(player1Transform.position, player2Transform.position);
+        mainCamera.orthographicSize = Vector2.Distance(player1Transform.position, player2Transform.position) + height;
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minHeight, maxHeight);
     }
 
