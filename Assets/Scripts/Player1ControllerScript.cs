@@ -156,6 +156,15 @@ public class Player1ControllerScript : MonoBehaviour
                 }
             }
 
+            else if (collision.gameObject.tag == "Charge Enemy")
+            {
+                var enemyScript = collision.gameObject.GetComponent<EnemyTwoScript>();
+                if (!enemyScript.isDead)
+                {
+                    Die();
+                }
+            }
+
             else if (collision.gameObject.tag == "Big Enemy")
             {
                 var enemyScript = collision.gameObject.GetComponent<BigEnemyScript>();
