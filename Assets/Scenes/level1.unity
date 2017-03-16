@@ -3006,6 +3006,7 @@ MonoBehaviour:
   floor: {fileID: 0}
   startingLives: 3
   respawnDelay: 5
+  invulnerabilityDuration: 3
   player1: {fileID: 1781926955272654, guid: ed15822345590004faad78726c452bfb, type: 2}
   player2: {fileID: 1534644657595544, guid: 9c711217e725b5f488d8a715b1d19a63, type: 2}
 --- !u!4 &969745386

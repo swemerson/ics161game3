@@ -14,7 +14,11 @@ public class Player1ControllerScript : MonoBehaviour
     public int maxAmmoStored;
     public GameObject bullet;
     public float deathDelay;
+
+    [HideInInspector]
     public bool isDead;
+    [HideInInspector]
+    public bool isInvulnerable;
 
     private float nextFire;
 	private float nextDash;    
@@ -34,6 +38,7 @@ public class Player1ControllerScript : MonoBehaviour
     void Start()
     {
         isDead = false;
+        isInvulnerable = false;
 		isDashing = false;
         var childTransforms = GetComponentsInChildren<Transform> ();
         foreach (var childTransform in childTransforms)
@@ -139,7 +144,7 @@ public class Player1ControllerScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // If hit by a live enemy, lose life
-        if (!isDead)
+        if (!isDead && !isInvulnerable)
         {
             if (collision.gameObject.tag == "Enemy")
             {

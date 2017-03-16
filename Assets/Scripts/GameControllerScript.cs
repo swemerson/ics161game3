@@ -15,6 +15,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject floor;
     public int startingLives;
     public int respawnDelay;
+    public float invulnerabilityDuration;
     public GameObject player1;
     public GameObject player2;
 
@@ -132,6 +133,9 @@ public class GameControllerScript : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
         player.SetActive(true);
         player1Script.isDead = false;
+        player1Script.isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        player1Script.isInvulnerable = false;
     }
 
     private IEnumerator StartRespawnTimer()
@@ -167,6 +171,9 @@ public class GameControllerScript : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
         player.SetActive(true);
         player2Script.isDead = false;
+        player2Script.isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        player2Script.isInvulnerable = false;
     }
 
     private IEnumerator StartRespawnTimerP2()
