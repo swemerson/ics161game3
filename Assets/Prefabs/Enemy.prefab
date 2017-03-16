@@ -452,6 +452,8 @@ MonoBehaviour:
   deathSpinSpeed: 1000
   destroyDelay: 2
   visionDistance: 30
+  ammo: {fileID: 1490164892379110, guid: b0f10c75a442da54d9386328cdb1672a, type: 2}
+  chanceOfAmmoDrop: 25
   isDead: 0
 --- !u!198 &198173767436015512
 ParticleSystem:

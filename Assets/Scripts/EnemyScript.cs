@@ -8,6 +8,8 @@ public class EnemyScript : MonoBehaviour
     public float deathSpinSpeed;
     public float destroyDelay;
 	public float visionDistance;
+    public GameObject ammo;
+    public int chanceOfAmmoDrop;
 
     [HideInInspector]
     public bool isDead;
@@ -90,14 +92,20 @@ public class EnemyScript : MonoBehaviour
     {
         // If hit by a bullet, die
         if (collision.gameObject.tag == "Bullet")
-        {
+        {           
             if (!isDead)
             {
+                if (Random.Range(0, 100) > (100 - chanceOfAmmoDrop))
+                {
+                    Instantiate(ammo, transform.position, new Quaternion(0, 0, 0, 0));
+                }
+
                 isDead = true;
                 bloodParticleSystem.Play();
 				enemyRigidbody2D.AddForce(collision.gameObject.transform.position * impactForce, ForceMode2D.Impulse);
                 hitSound.Play();
                 gameControllerScript.IncrementScore();
+                
                 Destroy(gameObject, destroyDelay);
             }            
         }
