@@ -15,6 +15,7 @@ public class Player1ControllerScript : MonoBehaviour
     public int maxAmmoStored;
     public GameObject bullet;
     public float deathDelay;
+    public float deathForce;
 
     [HideInInspector]
     public bool isDead;
@@ -77,8 +78,7 @@ public class Player1ControllerScript : MonoBehaviour
                 var objectPos = Camera.main.WorldToScreenPoint(transform.position);
                 var targetX = Input.mousePosition.x - objectPos.x;
                 var targetY = Input.mousePosition.y - objectPos.y;
-                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));                
+                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;            
                 rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }       
 
@@ -99,7 +99,7 @@ public class Player1ControllerScript : MonoBehaviour
 				nextDash = Time.time + dashCooldown;
 				gameControllerScript.Dash (dashCooldown);
 			}   
-			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.smoothDeltaTime);
+			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
 
             // Reload
@@ -182,7 +182,7 @@ public class Player1ControllerScript : MonoBehaviour
                 }
             }
 
-            else if (collision.gameObject.tag == "Enemy Bullet")
+            else if (collision.gameObject.tag == "Enemy Bullet" || collision.gameObject.tag == "Spinner")
             {
                 Die();
             }
@@ -206,6 +206,7 @@ public class Player1ControllerScript : MonoBehaviour
 
     void Die()
     {
+        rigidBody2d.AddForce(new Vector2(Random.Range(-deathForce, deathForce), Random.Range(-deathForce, deathForce)), ForceMode2D.Impulse);
         explosionSound.Play();
         bloodSpray.Play();
         gameControllerScript.LoseLife(gameObject);

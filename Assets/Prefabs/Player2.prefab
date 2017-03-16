@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SliceAgainTime: 0.3
+  PS4Controller: 0
 --- !u!114 &114749253084196158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1048,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53867f2cd2638374e812836f759b2491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PS4Controller: 0
   moveSpeed: 12
   dashSpeed: 15
   dashDuration: 0.25
@@ -1060,6 +1062,7 @@ MonoBehaviour:
   maxAmmoStored: 200
   bullet: {fileID: 1520889275721594, guid: 62f3fc8c2a4cb3245979c13f60e791ff, type: 2}
   deathDelay: 2
+  deathForce: 100
   isDead: 0
   isInvulnerable: 0
 --- !u!198 &198962927129164882
@@ -1070,7 +1073,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1534644657595544}
   serializedVersion: 5
   lengthInSec: 5
-  speed: 1
+  simulationSpeed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0

@@ -16,6 +16,7 @@ public class Player2ControllerScript : MonoBehaviour
     public int maxAmmoStored;
     public GameObject bullet;
     public float deathDelay;
+    public float deathForce;
 
     [HideInInspector]
     public bool isDead;
@@ -82,8 +83,7 @@ public class Player2ControllerScript : MonoBehaviour
             {
                 var targetX = Input.GetAxisRaw(joyRightHoriz);
                 var targetY = Input.GetAxisRaw(joyRightVert);
-                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));                
+                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;              
                 rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }
             // Shoot
@@ -189,7 +189,7 @@ public class Player2ControllerScript : MonoBehaviour
                 }
             }
 
-            else if (collision.gameObject.tag == "Enemy Bullet")
+            else if (collision.gameObject.tag == "Enemy Bullet" || collision.gameObject.tag == "Spinner")
             {
                 Die();
             }
@@ -213,6 +213,7 @@ public class Player2ControllerScript : MonoBehaviour
 
     void Die()
     {
+        rigidBody2d.AddForce(new Vector2(Random.Range(-deathForce, deathForce), Random.Range(-deathForce, deathForce)), ForceMode2D.Impulse);
         explosionSound.Play();
         bloodSpray.Play();
         gameControllerScript.LoseLifeP2(gameObject);
