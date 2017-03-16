@@ -61,7 +61,7 @@ public class Player2ControllerScript : MonoBehaviour
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
 		
-    void FixedUpdate()
+    void Update()
     {
         if (!isDead)
         {
@@ -72,7 +72,8 @@ public class Player2ControllerScript : MonoBehaviour
                 var targetY = Input.GetAxisRaw("Joy Right Vertical");
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
                 var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
+//				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }
 
             // Shoot
