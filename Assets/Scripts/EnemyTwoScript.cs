@@ -82,13 +82,13 @@ public class EnemyTwoScript : MonoBehaviour
         // Move and rotate toward the player
         if (isChasing && !isDead && Vector2.Distance(transform.position, playerTransform.position) <= chargeDistance && Time.time > chargeCD)
         {
-            Debug.Log("Test2");
+            //Debug.Log("Test2");
             chargeCD = Time.time + chargeCooldown;
             isCharging = true;
         }
         else if (isCharging && !isDead && isChasing && !isCharge)
         {
-            Debug.Log("Test");
+            //Debug.Log("Test");
             StartCoroutine(ChargeDelay());
             chargePos = playerTransform.position;
             isCharging = false;

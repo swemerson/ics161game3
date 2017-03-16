@@ -455,7 +455,7 @@ MonoBehaviour:
   chargeDistance: 7.5
   chargeTime: 1
   chargeCooldown: 4
-  chargeSpeed: 4.5
+  chargeSpeed: 2.5
   timeTest: 0
   isDead: 0
 --- !u!198 &198764115280031590

@@ -132,7 +132,7 @@ public class Player2ControllerScript : MonoBehaviour
                 --ammoLoaded;
                 gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
             }
-            else if (ammoLoaded == 0)
+            else if (ammoLoaded == 0 && ammoStored > 0)
             {
                 isReloading = true;
                 gameControllerScript.Reload(reloadDuration);
