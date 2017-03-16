@@ -1202,7 +1202,7 @@ MonoBehaviour:
   lerpSpeed: 7
   mouseZoomSpeed: 10
   controllerZoomSpeed: 0.5
-  minHeight: 5
+  minHeight: 20
   maxHeight: 50
 --- !u!1 &306316655
 GameObject:

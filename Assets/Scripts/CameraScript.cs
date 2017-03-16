@@ -48,6 +48,9 @@ public class CameraScript : MonoBehaviour
         }
                 
         transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * lerpSpeed);
+
+        mainCamera.orthographicSize = Vector2.Distance(player1Transform.position, player2Transform.position);
+        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minHeight, maxHeight);
     }
 
     public void ZoomFullOut()
