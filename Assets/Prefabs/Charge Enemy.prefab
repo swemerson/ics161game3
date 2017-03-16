@@ -182,7 +182,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: cb71a889a3609ae41b320c45c6490df3, type: 2}
+  - {fileID: 2100000, guid: 18effc41a71fff64cbe71bcdfec68cca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   visionDistance: 30
   chargeDistance: 7.5
   chargeTime: 1
-  chargeCooldown: 3
+  chargeCooldown: 4
   chargeSpeed: 4.5
   timeTest: 0
   isDead: 0
@@ -513,7 +513,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -721829383
+  randomSeed: 997720167
   InitialModule:
     serializedVersion: 3
     enabled: 1
