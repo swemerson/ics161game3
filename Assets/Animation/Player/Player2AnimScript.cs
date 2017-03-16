@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerAnimScript : MonoBehaviour {
+public class Player2AnimScript : MonoBehaviour {
     Animator anim;
     public float SliceAgainTime = 0.3f;
     float SliceAgainElapsed = 0.0f;
@@ -17,7 +17,7 @@ public class PlayerAnimScript : MonoBehaviour {
 
     void TrySlice()
     {
-        if (Input.GetAxis("Fire2") != 0)
+        if (Input.GetAxis("Fire2P2") != 0)
         {
             if (Time.time >= SliceAgainElapsed)
             {

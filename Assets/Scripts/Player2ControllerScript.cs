@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerControllerScript : MonoBehaviour
+public class Player2ControllerScript : MonoBehaviour
 {
     public float moveSpeed;
 	public float dashSpeed;
@@ -65,42 +65,33 @@ public class PlayerControllerScript : MonoBehaviour
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
                 var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
-                Shoot();
             }
-            else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-            {
-                var objectPos = Camera.main.WorldToScreenPoint(transform.position);
-                var targetX = Input.mousePosition.x - objectPos.x;
-                var targetY = Input.mousePosition.y - objectPos.y;
-                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
-            }       
 
             // Shoot
-            if (Input.GetAxis("Fire1") != 0)
+            if (Input.GetAxis("Fire1P2") != 0)
             {
                 Shoot();
-            }            
+            }
 
             // Move or Dash
-            var moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
+            var moveDirection = new Vector3(Input.GetAxisRaw("HorizontalP2"), Input.GetAxisRaw("VerticalP2"), 0f);
             moveDirection.Normalize();
-			if (Input.GetKeyDown(KeyCode.Space) && !isDashing && Time.time > nextDash)
+
+			if (Input.GetButtonDown("DashP2") && !isDashing && Time.time > nextDash)
             {
 				moveSpeed += dashSpeed;
 				Invoke ("DashComplete", dashDuration);
 				isDashing = true;
 				nextDash = Time.time + dashCooldown;
-				gameControllerScript.Dash (dashCooldown);
+				gameControllerScript.DashP2(dashCooldown);
             }                
 			transform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
 
             // Reload
-            if (Input.GetButtonDown("Reload") && !isReloading && ammoStored > 0)
+            if (Input.GetButtonDown("ReloadP2") && !isReloading && ammoStored > 0)
             {
                 isReloading = true;
-                gameControllerScript.Reload(reloadDuration);
+                gameControllerScript.ReloadP2(reloadDuration);
                 reloadSound.Play();
                 Invoke("Reload", reloadDuration);
             }
@@ -109,7 +100,7 @@ public class PlayerControllerScript : MonoBehaviour
 
     void Shoot()
     {
-        if (Time.time > nextFire)
+        if (!isReloading && Time.time > nextFire)
         {
             if (ammoLoaded > 0)
             {
@@ -117,7 +108,7 @@ public class PlayerControllerScript : MonoBehaviour
                 Instantiate(bullet, bulletSpawnRight.position, bulletSpawnRight.rotation);
                 shootSound.Play();
                 --ammoLoaded;
-                gameControllerScript.UpdateAmmoText(ammoStored, ammoLoaded);
+                gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
             }
             else
             {
@@ -135,7 +126,7 @@ public class PlayerControllerScript : MonoBehaviour
         }
 
         isReloading = false;
-        gameControllerScript.UpdateAmmoText(ammoStored, ammoLoaded);
+        gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
     }
 
 	void DashComplete()
@@ -182,7 +173,7 @@ public class PlayerControllerScript : MonoBehaviour
                 ammoStored = maxAmmoStored;
             }
 
-            gameControllerScript.UpdateAmmoText(ammoStored, ammoLoaded);
+            gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
         }
     }
 

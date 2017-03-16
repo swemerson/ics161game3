@@ -8,26 +8,20 @@ public class CameraScript : MonoBehaviour
     public float minHeight;
     public float maxHeight;
 
-    private Transform playerTransform;
+    private GameObject[] players;
     private Camera mainCamera;
 
 	void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        players = GameObject.FindGameObjectsWithTag("Player");
         mainCamera = GetComponent<Camera>();
 	}
 	
 	void Update()
     {
         // Follow the players with a delay
-        var cameraTarget = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z - 10);
+        var cameraTarget = new Vector3((players[0].transform.position.x + players[1].transform.position.x)/2, (players[0].transform.position.y + players[1].transform.position.y)/2, -10);
         transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * lerpSpeed);
-
-        // Zoom camera in/out
-        mainCamera.orthographicSize += -1 * Input.GetAxis("Mouse ScrollWheel") * mouseZoomSpeed;
-        mainCamera.orthographicSize += Input.GetAxis("Joy Right Shoulder") * controllerZoomSpeed;
-        mainCamera.orthographicSize -= Input.GetAxis("Joy Left Shoulder") * controllerZoomSpeed;
-        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minHeight, maxHeight);
     }
 
     public void ZoomFullOut()

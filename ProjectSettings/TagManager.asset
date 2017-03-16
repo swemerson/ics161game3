@@ -18,6 +18,10 @@ TagManager:
   - Big Enemy
   - Boss Slider
   - Enemy Bullet
+  - Dash Text P2
+  - Dash Slider P2
+  - Ammo Text P2
+  - Ammo Slider P2
   layers:
   - Default
   - TransparentFX
