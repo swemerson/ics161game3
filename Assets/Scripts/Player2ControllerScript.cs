@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player2ControllerScript : MonoBehaviour
 {
+    public bool PS4Controller;
     public float moveSpeed;
 	public float dashSpeed;
 	public float dashDuration;
@@ -38,6 +40,7 @@ public class Player2ControllerScript : MonoBehaviour
 
     void Start()
     {
+        PS4Controller = true;
         isDead = false;
         isInvulnerable = false;
 		isDashing = false;
@@ -61,22 +64,32 @@ public class Player2ControllerScript : MonoBehaviour
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
 		
-    void FixedUpdate()
+    void Update()
     {
+        string joyRestart = (PS4Controller) ? ("PS4 Restart") : ("Joy Restart");
+        if (Input.GetButtonDown(joyRestart))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         if (!isDead)
         {
             // Rotate character
-            if (Input.GetAxisRaw("Joy Right Horizontal") != 0 || Input.GetAxisRaw("Joy Right Vertical") != 0)
+            string joyRightHoriz = (PS4Controller) ? ("PS4 Right Horizontal") : ("Joy Right Horizontal");
+            string joyRightVert = (PS4Controller) ? ("PS4 Right Vertical") : ("Joy Right Vertical");
+
+            if (Input.GetAxisRaw(joyRightHoriz) != 0 || Input.GetAxisRaw(joyRightVert) != 0)
             {
-                var targetX = Input.GetAxisRaw("Joy Right Horizontal");
-                var targetY = Input.GetAxisRaw("Joy Right Vertical");
+                var targetX = Input.GetAxisRaw(joyRightHoriz);
+                var targetY = Input.GetAxisRaw(joyRightVert);
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
                 var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
+                //				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }
-
             // Shoot
-            if (Input.GetAxis("Fire1P2") != 0)
+            string joyShoot = (PS4Controller) ? ("PS4 Shoot") : ("Fire1P2");
+            if (Input.GetAxis(joyShoot) > 0)
             {
                 Shoot();
             }
@@ -85,7 +98,8 @@ public class Player2ControllerScript : MonoBehaviour
             var moveDirection = new Vector2(Input.GetAxisRaw("HorizontalP2"), Input.GetAxisRaw("VerticalP2"));
             moveDirection.Normalize();
 
-			if (Input.GetButtonDown("DashP2") && !isDashing && Time.time > nextDash)
+            string joyDash = (PS4Controller) ? ("PS4 Dash") : ("DashP2");
+			if (Input.GetButtonDown(joyDash) && !isDashing && Time.time > nextDash)
             {
 				moveSpeed += dashSpeed;
 				Invoke ("DashComplete", dashDuration);
@@ -96,7 +110,8 @@ public class Player2ControllerScript : MonoBehaviour
 			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.smoothDeltaTime);
 
             // Reload
-            if (Input.GetButtonDown("ReloadP2") && !isReloading && ammoStored > 0)
+            string joyReload = "ReloadP2";// (PS4Controller) ? ("PS4 Reload") : ("ReloadP2");
+            if (Input.GetButtonDown(joyReload) && !isReloading && ammoStored > 0)
             {
                 isReloading = true;
                 gameControllerScript.ReloadP2(reloadDuration);
