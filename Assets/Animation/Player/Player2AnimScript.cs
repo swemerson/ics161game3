@@ -17,7 +17,10 @@ public class Player2AnimScript : MonoBehaviour {
 	
 	void Update () {
         PS4Controller = player2Script.PS4Controller;
-        TrySlice();
+        if(!player2Script.isDead)
+        {
+            TrySlice();
+        }
     }
 
     void TrySlice()

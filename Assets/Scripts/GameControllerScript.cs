@@ -56,7 +56,7 @@ public class GameControllerScript : MonoBehaviour
         enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
         deathBox.enabled = false;
         livesP1 = startingLives;
-        livesP2 = 0;
+        livesP2 = startingLives;
         livesP1Text = GameObject.FindGameObjectWithTag("Lives P1").GetComponent<Text>();
         livesP2Text = GameObject.FindGameObjectWithTag("Lives P2").GetComponent<Text>();
         livesP1Text.text = "Lives: " + livesP1;

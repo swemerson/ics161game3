@@ -5,14 +5,19 @@ public class Player1AnimScript : MonoBehaviour {
     public float SliceAgainTime = 0.3f;
     float SliceAgainElapsed = 0.0f;
     private AudioSource lightsaberSound;
+    private Player1ControllerScript player1Script;
 
 	void Start () {
         anim = GetComponent<Animator>();
         lightsaberSound = GetComponent<AudioSource>();
+        player1Script = transform.parent.GetComponent<Player1ControllerScript>();
 	}
 	
 	void Update () {
-        TrySlice();
+        if(!player1Script.isDead)
+        {
+            TrySlice();
+        }
     }
 
     void TrySlice()

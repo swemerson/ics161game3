@@ -27,6 +27,7 @@ TagManager:
   - Respawn Timer P1
   - Respawn Timer P2
   - Player2
+  - Charge Enemy
   layers:
   - Default
   - TransparentFX
