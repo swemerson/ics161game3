@@ -529,11 +529,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   turnSpeed: 1
-  impactForce: 5
+  impactForce: 0
   deathSpinSpeed: 1000
   destroyDelay: 4
   visionDistance: 50
-  startingHitPoints: 75
+  startingHitPoints: 5
   hitColorDuration: 0.1
   firstFireDelay: 3
   fireRate: 2

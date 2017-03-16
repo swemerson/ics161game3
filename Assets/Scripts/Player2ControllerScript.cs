@@ -60,7 +60,7 @@ public class Player2ControllerScript : MonoBehaviour
         emptyClickSound = GetComponents<AudioSource>()[4];
         bloodSpray = GetComponent<ParticleSystem>();
         gameControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerScript>();
-        ammoLoaded = 0;
+        ammoLoaded = 5;
         ammoStored = 0;
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
@@ -131,6 +131,13 @@ public class Player2ControllerScript : MonoBehaviour
                 shootSound.Play();
                 --ammoLoaded;
                 gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
+            }
+            else if (ammoLoaded == 0)
+            {
+                isReloading = true;
+                gameControllerScript.Reload(reloadDuration);
+                reloadSound.Play();
+                Invoke("Reload", reloadDuration);
             }
             else
             {
