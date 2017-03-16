@@ -62,7 +62,7 @@ public class Player1ControllerScript : MonoBehaviour
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
 		
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetButtonDown("Restart"))
         {
@@ -78,9 +78,8 @@ public class Player1ControllerScript : MonoBehaviour
                 var targetX = Input.mousePosition.x - objectPos.x;
                 var targetY = Input.mousePosition.y - objectPos.y;
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
-//				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
+                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));                
+                rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }       
 
             // Shoot

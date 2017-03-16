@@ -64,7 +64,7 @@ public class Player2ControllerScript : MonoBehaviour
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
 		
-    void Update()
+    void FixedUpdate()
     {
         string joyRestart = (PS4Controller) ? ("PS4 Restart") : ("Joy Restart");
         if (Input.GetButtonDown(joyRestart))
@@ -83,9 +83,8 @@ public class Player2ControllerScript : MonoBehaviour
                 var targetX = Input.GetAxisRaw(joyRightHoriz);
                 var targetY = Input.GetAxisRaw(joyRightVert);
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
-                //				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
+                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));                
+                rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }
             // Shoot
             string joyShoot = (PS4Controller) ? ("PS4 Shoot") : ("Fire1P2");
@@ -107,7 +106,7 @@ public class Player2ControllerScript : MonoBehaviour
 				nextDash = Time.time + dashCooldown;
 				gameControllerScript.DashP2(dashCooldown);
             }                
-			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.smoothDeltaTime);
+			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
             // Reload
             string joyReload = "ReloadP2";// (PS4Controller) ? ("PS4 Reload") : ("ReloadP2");
