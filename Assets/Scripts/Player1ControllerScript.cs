@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player1ControllerScript : MonoBehaviour
 {
@@ -63,6 +64,11 @@ public class Player1ControllerScript : MonoBehaviour
 		
     void Update()
     {
+        if (Input.GetButtonDown("Restart"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         if (!isDead)
         {
             // Rotate character

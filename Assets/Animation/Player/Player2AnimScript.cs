@@ -5,24 +5,44 @@ public class Player2AnimScript : MonoBehaviour {
     public float SliceAgainTime = 0.3f;
     float SliceAgainElapsed = 0.0f;
     private AudioSource lightsaberSound;
+    public bool PS4Controller;
+    private Player2ControllerScript player2Script;
 
 	void Start () {
         anim = GetComponent<Animator>();
         lightsaberSound = GetComponent<AudioSource>();
+        player2Script = transform.parent.GetComponent<Player2ControllerScript>();
+        PS4Controller = player2Script.PS4Controller;
 	}
 	
 	void Update () {
+        PS4Controller = player2Script.PS4Controller;
         TrySlice();
     }
 
     void TrySlice()
     {
-        if (Input.GetAxis("Fire2P2") != 0)
+        string joyMelee = (PS4Controller) ? ("PS4 Melee") : ("Fire2P2");
+        if (joyMelee == "PS4 Melee")
         {
-            if (Time.time >= SliceAgainElapsed)
+            if (Input.GetAxis(joyMelee) > 0)
             {
-                Slice();
-                SliceAgainElapsed = Time.time + SliceAgainTime;
+                if (Time.time >= SliceAgainElapsed)
+                {
+                    Slice();
+                    SliceAgainElapsed = Time.time + SliceAgainTime;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetAxis(joyMelee) != 0)
+            {
+                if (Time.time >= SliceAgainElapsed)
+                {
+                    Slice();
+                    SliceAgainElapsed = Time.time + SliceAgainTime;
+                }
             }
         }
     }

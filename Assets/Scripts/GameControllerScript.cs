@@ -71,10 +71,7 @@ public class GameControllerScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Restart"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+       
     }
 
     public void StartEnemySpawner()
