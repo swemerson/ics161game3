@@ -129,6 +129,7 @@ public class GameControllerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         player.SetActive(true);
+        player.transform.position = player2.transform.position;
         player1Script.isDead = false;
         player1Script.isInvulnerable = true;
         yield return new WaitForSeconds(invulnerabilityDuration);
@@ -167,6 +168,7 @@ public class GameControllerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         player.SetActive(true);
+        player.transform.position = player1.transform.position;
         player2Script.isDead = false;
         player2Script.isInvulnerable = true;
         yield return new WaitForSeconds(invulnerabilityDuration);

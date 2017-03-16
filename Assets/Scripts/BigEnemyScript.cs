@@ -94,10 +94,14 @@ public class BigEnemyScript : MonoBehaviour
         {
             playerTransform = player1Transform;
         }
-        else
+        else if (player2 != null && player2.activeSelf)
         {
             playerTransform = player2Transform;
         }
+        else
+        {
+            playerTransform = transform;
+        }        
 
         // Move, rotate toward player
         if (!isDead && isChasing)

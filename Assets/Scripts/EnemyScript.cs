@@ -63,9 +63,13 @@ public class EnemyScript : MonoBehaviour
         {
             playerTransform = player1Transform;
         }
-        else
+        else if (player2 != null && player2.activeSelf)
         {
             playerTransform = player2Transform;
+        }
+        else
+        {
+            playerTransform = transform;
         }
 
         // Move and rotate toward the player

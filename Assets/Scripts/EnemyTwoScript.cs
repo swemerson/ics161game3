@@ -75,10 +75,16 @@ public class EnemyTwoScript : MonoBehaviour
         {
             playerTransform = player1Transform;
         }
-        else
+        else if (player2 != null && player2.activeSelf)
         {
             playerTransform = player2Transform;
         }
+        else
+        {
+            playerTransform = transform;
+        }
+
+
         // Move and rotate toward the player
         if (isChasing && !isDead && Vector2.Distance(transform.position, playerTransform.position) <= chargeDistance && Time.time > chargeCD)
         {
