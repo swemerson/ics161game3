@@ -252,4 +252,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 10
-  moveSpeed: 5
+  moveSpeed: 15

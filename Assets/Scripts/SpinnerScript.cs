@@ -14,6 +14,7 @@ public class SpinnerScript : MonoBehaviour
     {
         rigidBody2d = GetComponent<Rigidbody2D>();
         moveDirection = new Vector2(Random.Range(-moveSpeed, moveSpeed), Random.Range(-moveSpeed, moveSpeed));
+        moveDirection.Normalize();
     }
 	
 	// Update is called once per frame
@@ -31,5 +32,6 @@ public class SpinnerScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         moveDirection = new Vector2(Random.Range(-moveSpeed, moveSpeed), Random.Range(-moveSpeed, moveSpeed));
+        moveDirection.Normalize();
     }
 }
