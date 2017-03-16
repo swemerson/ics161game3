@@ -496,7 +496,7 @@ Rigidbody2D:
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -1060,6 +1060,8 @@ MonoBehaviour:
   maxAmmoStored: 200
   bullet: {fileID: 1520889275721594, guid: 62f3fc8c2a4cb3245979c13f60e791ff, type: 2}
   deathDelay: 2
+  isDead: 0
+  isInvulnerable: 0
 --- !u!198 &198962927129164882
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1068,7 +1070,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1534644657595544}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0

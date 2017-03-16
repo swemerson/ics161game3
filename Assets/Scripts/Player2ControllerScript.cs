@@ -34,6 +34,7 @@ public class Player2ControllerScript : MonoBehaviour
     private GameControllerScript gameControllerScript;
     private int ammoLoaded;
     private int ammoStored;
+	private Rigidbody2D rigidBody2d;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class Player2ControllerScript : MonoBehaviour
         gameControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerScript>();
         ammoLoaded = 0;
         ammoStored = 0;
+		rigidBody2d = GetComponent<Rigidbody2D>();
     }
 		
     void Update()
@@ -71,6 +73,7 @@ public class Player2ControllerScript : MonoBehaviour
                 var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
                 var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
+//				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
             }
 
             // Shoot
@@ -80,7 +83,7 @@ public class Player2ControllerScript : MonoBehaviour
             }
 
             // Move or Dash
-            var moveDirection = new Vector3(Input.GetAxisRaw("HorizontalP2"), Input.GetAxisRaw("VerticalP2"), 0f);
+            var moveDirection = new Vector2(Input.GetAxisRaw("HorizontalP2"), Input.GetAxisRaw("VerticalP2"));
             moveDirection.Normalize();
 
 			if (Input.GetButtonDown("DashP2") && !isDashing && Time.time > nextDash)
@@ -91,7 +94,7 @@ public class Player2ControllerScript : MonoBehaviour
 				nextDash = Time.time + dashCooldown;
 				gameControllerScript.DashP2(dashCooldown);
             }                
-			transform.position += moveDirection * moveSpeed * Time.smoothDeltaTime;
+			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.smoothDeltaTime);
 
             // Reload
             if (Input.GetButtonDown("ReloadP2") && !isReloading && ammoStored > 0)
