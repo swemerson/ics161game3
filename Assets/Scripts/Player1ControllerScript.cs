@@ -60,42 +60,15 @@ public class Player1ControllerScript : MonoBehaviour
         ammoStored = 0;
 		rigidBody2d = GetComponent<Rigidbody2D>();
     }
-		
-    void Update()
+
+    void FixedUpdate()
     {
         if (!isDead)
         {
-            // Rotate character
-            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-            {
-                var objectPos = Camera.main.WorldToScreenPoint(transform.position);
-                var targetX = Input.mousePosition.x - objectPos.x;
-                var targetY = Input.mousePosition.y - objectPos.y;
-                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
-                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget, turnSpeed);
-//				rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
-            }       
-
-            // Shoot
             if (Input.GetAxis("Fire1") != 0)
             {
                 Shoot();
-            }            
-
-            // Move or Dash
-			var moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-			moveDirection.Normalize();
-			if (Input.GetKeyDown(KeyCode.Space) && !isDashing && Time.time > nextDash)
-			{
-				moveSpeed += dashSpeed;
-				Invoke ("DashComplete", dashDuration);
-				isDashing = true;
-				nextDash = Time.time + dashCooldown;
-				gameControllerScript.Dash (dashCooldown);
-			}   
-			rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.smoothDeltaTime);
-
+            }
 
             // Reload
             if (Input.GetButtonDown("Reload") && !isReloading && ammoStored > 0)
@@ -105,7 +78,31 @@ public class Player1ControllerScript : MonoBehaviour
                 reloadSound.Play();
                 Invoke("Reload", reloadDuration);
             }
+
+            // Rotate character
+            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+            {
+                var objectPos = Camera.main.WorldToScreenPoint(transform.position);
+                var targetX = Input.mousePosition.x - objectPos.x;
+                var targetY = Input.mousePosition.y - objectPos.y;
+                var angle = Mathf.Atan2(targetY, targetX) * Mathf.Rad2Deg - 90f;
+                var rotationTarget = Quaternion.Euler(new Vector3(0, 0, angle));
+                rigidBody2d.MoveRotation(angle + turnSpeed * Time.fixedDeltaTime);
+            }
+
+            var moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            moveDirection.Normalize();
+            if (Input.GetKeyDown(KeyCode.Space) && !isDashing && Time.time > nextDash)
+            {
+                moveSpeed += dashSpeed;
+                Invoke("DashComplete", dashDuration);
+                isDashing = true;
+                nextDash = Time.time + dashCooldown;
+                gameControllerScript.Dash(dashCooldown);
+            }
+            rigidBody2d.MovePosition(rigidBody2d.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
         }
+       
     }
 
     void Shoot()
