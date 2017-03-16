@@ -53,8 +53,8 @@ GameObject:
   - component: {fileID: 4068144296727638}
   - component: {fileID: 23189897502887200}
   - component: {fileID: 95212617160625418}
-  - component: {fileID: 114136555875821760}
   - component: {fileID: 82451915269338632}
+  - component: {fileID: 114022856037312226}
   m_Layer: 0
   m_Name: Melee
   m_TagString: Untagged
@@ -283,7 +283,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 269fbeca6d077814ebe369b8decd832a, type: 2}
+  - {fileID: 2100000, guid: 4b06115314c612f4db43cd81601aa7cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,7 +314,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 269fbeca6d077814ebe369b8decd832a, type: 2}
+  - {fileID: 2100000, guid: 4b06115314c612f4db43cd81601aa7cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -345,7 +345,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 269fbeca6d077814ebe369b8decd832a, type: 2}
+  - {fileID: 2100000, guid: 4b06115314c612f4db43cd81601aa7cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -376,7 +376,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c19ac4c3d850c3b49a1a8d39fa89f885, type: 2}
+  - {fileID: 2100000, guid: 4b06115314c612f4db43cd81601aa7cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1025,7 +1025,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114136555875821760
+--- !u!114 &114022856037312226
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1408969704585612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd91057272b5ea43a71ed01d1b45983, type: 3}
+  m_Script: {fileID: 11500000, guid: 54df9f046fd74ca46b05dc054e492676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SliceAgainTime: 0.3
@@ -1059,6 +1059,7 @@ MonoBehaviour:
   ammoPickupAmount: 20
   maxAmmoStored: 200
   bullet: {fileID: 1520889275721594, guid: 62f3fc8c2a4cb3245979c13f60e791ff, type: 2}
+  deathDelay: 2
 --- !u!198 &198962927129164882
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1114,7 +1115,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1324239768
+  randomSeed: -1129206209
   InitialModule:
     serializedVersion: 3
     enabled: 1

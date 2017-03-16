@@ -13,6 +13,10 @@ public class GameControllerScript : MonoBehaviour
     public float increaseEnemiesAmount;
     public GameObject enemy;
     public GameObject floor;
+    public int startingLives;
+    public int respawnDelay;
+    public GameObject player1;
+    public GameObject player2;
 
     private int score;
     private Text scoreBox;
@@ -26,8 +30,16 @@ public class GameControllerScript : MonoBehaviour
     private Text ammoBoxP2;
     private Slider ammoSliderP2;
     private GameObject[] enemySpawns;
+    private int livesP1;
+    private int livesP2;
+    private Text livesP1Text;
+    private Text livesP2Text;
+    private GameObject respawnTimerP1;
+    private GameObject respawnTimerP2;
+    private Player1ControllerScript player1Script;
+    private Player2ControllerScript player2Script;
 
-	void Start()
+    void Start()
     {
         score = 0;
         scoreBox = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
@@ -41,8 +53,20 @@ public class GameControllerScript : MonoBehaviour
         ammoBoxP2 = GameObject.FindGameObjectWithTag("Ammo Text P2").GetComponent<Text>();
         ammoSliderP2 = GameObject.FindGameObjectWithTag("Ammo Slider P2").GetComponent<Slider>();
         enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
-        deathBox.enabled = false;       
-	}
+        deathBox.enabled = false;
+        livesP1 = startingLives;
+        livesP2 = 0;
+        livesP1Text = GameObject.FindGameObjectWithTag("Lives P1").GetComponent<Text>();
+        livesP2Text = GameObject.FindGameObjectWithTag("Lives P2").GetComponent<Text>();
+        livesP1Text.text = "Lives: " + livesP1;
+        livesP2Text.text = "Lives: " + livesP2;
+        respawnTimerP1 = GameObject.FindGameObjectWithTag("Respawn Timer P1");
+        respawnTimerP2 = GameObject.FindGameObjectWithTag("Respawn Timer P2");
+        respawnTimerP1.SetActive(false);
+        respawnTimerP2.SetActive(false);
+        player1Script = GameObject.FindGameObjectWithTag("Player").GetComponent<Player1ControllerScript>();
+        player2Script = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player2ControllerScript>();
+    }
 
     void Update()
     {
@@ -86,6 +110,76 @@ public class GameControllerScript : MonoBehaviour
     public void IncrementScore()
     {
         scoreBox.text = "SCORE: " + ++score;
+    }
+
+    public void LoseLife(GameObject player)
+    {        
+        if (livesP1 > 0)
+        {
+            livesP1Text.text = "Lives: " + --livesP1;            
+            StartCoroutine(RespawnPlayer(player));
+            StartCoroutine(StartRespawnTimer());
+        }
+
+        if (livesP1 == 0 && livesP2 == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private IEnumerator RespawnPlayer(GameObject player)
+    {
+        yield return new WaitForSeconds(respawnDelay);
+        player.SetActive(true);
+        player1Script.isDead = false;
+    }
+
+    private IEnumerator StartRespawnTimer()
+    {
+        respawnTimerP1.SetActive(true);
+        var counter = respawnDelay;
+        respawnTimerP1.GetComponent<Text>().text = "Respawning in " + counter + "...";
+        for (int i = 0; i < respawnDelay; ++i)
+        {
+            yield return new WaitForSeconds(1);
+            respawnTimerP1.GetComponent<Text>().text = "Respawning in " + --counter + "...";
+        }
+        respawnTimerP1.SetActive(false);
+    }
+
+    public void LoseLifeP2(GameObject player)
+    {
+        if (livesP2 > 0)
+        {
+            livesP2Text.text = "Lives: " + --livesP2;
+            StartCoroutine(RespawnPlayer2(player));
+            StartCoroutine(StartRespawnTimerP2());
+        }
+
+        if (livesP1 == 0 && livesP2 == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private IEnumerator RespawnPlayer2(GameObject player)
+    {
+        yield return new WaitForSeconds(respawnDelay);
+        player.SetActive(true);
+        player2Script.isDead = false;
+    }
+
+    private IEnumerator StartRespawnTimerP2()
+    {
+        respawnTimerP2.SetActive(true);
+        var counter = respawnDelay;
+        respawnTimerP2.GetComponent<Text>().text = "Respawning in " + counter + "...";
+        for (int i = 0; i < respawnDelay; ++i)
+        {
+            yield return new WaitForSeconds(1);
+            respawnTimerP2.GetComponent<Text>().text = "Respawning in " + --counter + "...";
+        }
+        respawnTimerP2.SetActive(false);
     }
 
     // Removes all enemies, and displays the Game Over message

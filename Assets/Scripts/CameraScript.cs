@@ -8,19 +8,45 @@ public class CameraScript : MonoBehaviour
     public float minHeight;
     public float maxHeight;
 
-    private GameObject[] players;
+    private GameObject player1;
+    private GameObject player2;
+    private Transform player1Transform;
+    private Transform player2Transform;
     private Camera mainCamera;
 
 	void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        player1 = GameObject.FindGameObjectWithTag("Player");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
+        if (player1 != null)
+        {
+            player1Transform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
+        if (player2 != null)
+        {
+            player2Transform = GameObject.FindGameObjectWithTag("Player2").GetComponent<Transform>();
+        }
         mainCamera = GetComponent<Camera>();
 	}
 	
 	void Update()
     {
+        Vector3 cameraTarget;
+
         // Follow the players with a delay
-        var cameraTarget = new Vector3((players[0].transform.position.x + players[1].transform.position.x)/2, (players[0].transform.position.y + players[1].transform.position.y)/2, -10);
+        if (player1 != null && player2 != null && player1.activeSelf && player2.activeSelf)
+        {
+            cameraTarget = new Vector3((player1Transform.position.x + player2Transform.position.x) / 2, (player1Transform.position.y + player2Transform.position.y) / 2, -10);
+        }
+        else if (player1 != null && player1.activeSelf)
+        {
+            cameraTarget = new Vector3(player1Transform.position.x, player1Transform.position.y, -10);
+        }
+        else
+        {
+            cameraTarget = new Vector3(player2Transform.position.x, player2Transform.position.y, -10);
+        }
+                
         transform.position = Vector3.Lerp(transform.position, cameraTarget, Time.smoothDeltaTime * lerpSpeed);
     }
 

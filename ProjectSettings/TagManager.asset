@@ -22,6 +22,11 @@ TagManager:
   - Dash Slider P2
   - Ammo Text P2
   - Ammo Slider P2
+  - Lives P1
+  - Lives P2
+  - Respawn Timer P1
+  - Respawn Timer P2
+  - Player2
   layers:
   - Default
   - TransparentFX

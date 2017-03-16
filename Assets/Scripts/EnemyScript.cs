@@ -12,7 +12,10 @@ public class EnemyScript : MonoBehaviour
     [HideInInspector]
     public bool isDead;
 
-    private Transform playerTransform;
+    private GameObject player1;
+    private GameObject player2;
+    private Transform player1Transform;
+    private Transform player2Transform;
     private Rigidbody2D enemyRigidbody2D;
     private ParticleSystem bloodParticleSystem;
     private AudioSource hitSound;
@@ -23,7 +26,16 @@ public class EnemyScript : MonoBehaviour
     {
         isDead = false;
 		isChasing = false;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        player1 = GameObject.FindGameObjectWithTag("Player");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
+        if (player1 != null)
+        {
+            player1Transform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
+        if (player2 != null)
+        {
+            player2Transform = GameObject.FindGameObjectWithTag("Player2").GetComponent<Transform>();
+        }
         enemyRigidbody2D = GetComponent<Rigidbody2D>();
         bloodParticleSystem = GetComponent<ParticleSystem>();
         hitSound = GetComponent<AudioSource>();
@@ -32,6 +44,28 @@ public class EnemyScript : MonoBehaviour
 		
 	void Update()
     {
+        // Find closer player
+        Transform playerTransform;
+        if (player1 != null && player2 != null && player1.activeSelf && player2.activeSelf)
+        {
+            if (Vector3.Distance(transform.position, player1Transform.position) < Vector3.Distance(transform.position, player2Transform.position))
+            {
+                playerTransform = player1Transform;
+            }
+            else
+            {
+                playerTransform = player2Transform;
+            }
+        }
+        else if (player1 != null && player1.activeSelf)
+        {
+            playerTransform = player1Transform;
+        }
+        else
+        {
+            playerTransform = player2Transform;
+        }
+
         // Move and rotate toward the player
         if (!isDead && isChasing)
         {
@@ -46,7 +80,7 @@ public class EnemyScript : MonoBehaviour
         }      
 
 		// Did the enemy see the player? Todo: Add check for line of sight
-		else if (Vector2.Distance(transform.position, playerTransform.position) <= visionDistance)
+		else if ((player1 != null || player2 != null) &&Vector2.Distance(transform.position, playerTransform.position) <= visionDistance)
 		{
 			isChasing = true;
 		}

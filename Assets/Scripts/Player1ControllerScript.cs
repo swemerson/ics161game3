@@ -13,10 +13,11 @@ public class Player1ControllerScript : MonoBehaviour
     public int ammoPickupAmount;
     public int maxAmmoStored;
     public GameObject bullet;
+    public float deathDelay;
+    public bool isDead;
 
     private float nextFire;
-	private float nextDash;
-    private bool isDead;
+	private float nextDash;    
 	private bool isDashing;
     private bool isReloading; 
     private Transform bulletSpawnRight;
@@ -137,32 +138,35 @@ public class Player1ControllerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // If hit by a live enemy, end the game
-        if (collision.gameObject.tag == "Enemy")
+        // If hit by a live enemy, lose life
+        if (!isDead)
         {
-            var enemyScript = collision.gameObject.GetComponent<EnemyScript>();
-            if (!enemyScript.isDead)
+            if (collision.gameObject.tag == "Enemy")
+            {
+                var enemyScript = collision.gameObject.GetComponent<EnemyScript>();
+                if (!enemyScript.isDead)
+                {
+                    Die();
+                }
+            }
+
+            else if (collision.gameObject.tag == "Big Enemy")
+            {
+                var enemyScript = collision.gameObject.GetComponent<BigEnemyScript>();
+                if (!enemyScript.isDead)
+                {
+                    Die();
+                }
+            }
+
+            else if (collision.gameObject.tag == "Enemy Bullet")
             {
                 Die();
             }
-        }
-
-        else if (collision.gameObject.tag == "Big Enemy")
-        {
-            var enemyScript = collision.gameObject.GetComponent<BigEnemyScript>();
-            if (!enemyScript.isDead)
-            {
-                Die();
-            }
-        }
-
-        else if (collision.gameObject.tag == "Enemy Bullet")
-        {
-            Die();
-        }
+        }       
 
         // If ran into ammo box, collect it
-        else if (collision.gameObject.tag == "Ammo")
+        if (collision.gameObject.tag == "Ammo")
         {
             Destroy(collision.gameObject);
             ammoPickupSound.Play();
@@ -181,7 +185,13 @@ public class Player1ControllerScript : MonoBehaviour
     {
         explosionSound.Play();
         bloodSpray.Play();
+        gameControllerScript.LoseLife(gameObject);
+        Invoke("Disappear", deathDelay);
         isDead = true;
-        gameControllerScript.GameOver();
+    }
+
+    void Disappear()
+    {
+        gameObject.SetActive(false);
     }
 }
