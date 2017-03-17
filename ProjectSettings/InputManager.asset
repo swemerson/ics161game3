@@ -7,7 +7,7 @@ InputManager:
   m_Axes:
   - serializedVersion: 3
     m_Name: Horizontal
-    descriptiveName: 
+    descriptiveName: P1 Horizontal Movement
     descriptiveNegativeName: 
     negativeButton: left
     positiveButton: right
@@ -23,7 +23,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
-    descriptiveName: 
+    descriptiveName: P1 Vertical Movement
     descriptiveNegativeName: 
     negativeButton: down
     positiveButton: up
@@ -39,7 +39,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: 
+    descriptiveName: P1 Fire
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left ctrl
@@ -55,7 +55,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire2
-    descriptiveName: 
+    descriptiveName: P1 Melee
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left alt
@@ -70,24 +70,8 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Fire3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left shift
-    altNegativeButton: 
-    altPositiveButton: mouse 2
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: Jump
-    descriptiveName: 
+    descriptiveName: P1 Dash
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: space
@@ -103,7 +87,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse X
-    descriptiveName: 
+    descriptiveName: 'P1 Mouse X '
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -119,7 +103,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse Y
-    descriptiveName: 
+    descriptiveName: P1 Mouse Y
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -134,24 +118,8 @@ InputManager:
     axis: 1
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Mouse ScrollWheel
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 0.1
-    snap: 0
-    invert: 0
-    type: 1
-    axis: 2
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: HorizontalP2
-    descriptiveName: 
+    descriptiveName: P2 Horizontal Movement
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -167,7 +135,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: VerticalP2
-    descriptiveName: 
+    descriptiveName: P2 Vertical Movement
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -183,7 +151,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1P2
-    descriptiveName: 
+    descriptiveName: P2 Fire
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -199,7 +167,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire2P2
-    descriptiveName: 
+    descriptiveName: P2 Melee
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -214,24 +182,8 @@ InputManager:
     axis: 8
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Fire3
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: joystick button 2
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: DashP2
-    descriptiveName: 
+    descriptiveName: P2 Dash
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 8
@@ -263,7 +215,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Restart
-    descriptiveName: 
+    descriptiveName: P1 Restart
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: backspace
@@ -279,7 +231,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Cancel
-    descriptiveName: 
+    descriptiveName: Exit Game
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: escape
@@ -294,56 +246,8 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Joy Right Horizontal
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: joystick button 1
-    gravity: 0
-    dead: 0.19
-    sensitivity: 1
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 3
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Joy Right Vertical
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: joystick button 1
-    gravity: 0
-    dead: 0.19
-    sensitivity: 1
-    snap: 0
-    invert: 1
-    type: 2
-    axis: 4
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Joy Right Shoulder
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: joystick button 5
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: ReloadP2
-    descriptiveName: 
+    descriptiveName: P2 Reload
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 5
@@ -359,7 +263,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Reload
-    descriptiveName: 
+    descriptiveName: P1 Reload
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: r
@@ -375,7 +279,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: PS4 Right Horizontal
-    descriptiveName: 
+    descriptiveName: P2 Aim Horizontal
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -391,7 +295,7 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Right Vertical
-    descriptiveName: 
+    descriptiveName: P2 Aim Vertical
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -407,7 +311,7 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Shoot
-    descriptiveName: 
+    descriptiveName: P2 Shoot
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -423,7 +327,7 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Dash
-    descriptiveName: 
+    descriptiveName: P2 Dash
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 4
@@ -439,7 +343,7 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Melee
-    descriptiveName: 
+    descriptiveName: P2 Melee
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -455,26 +359,10 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Restart
-    descriptiveName: 
+    descriptiveName: P2 Restart
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 8
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.19
-    sensitivity: 1
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 4
-    joyNum: 1
-  - serializedVersion: 3
-    m_Name: Joy Restart
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: joystick button 6
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
