@@ -37,9 +37,11 @@ public class BigEnemyScript : MonoBehaviour
     private Slider healthBar;
     private int hitPoints;
     private CameraScript cameraScript;
+    private Text win;
 
     void Start()
     {
+        win = GameObject.FindGameObjectWithTag("Win").GetComponent<Text>();
         isDead = false;
 		isChasing = false;
         player1 = GameObject.FindGameObjectWithTag("Player");
@@ -139,6 +141,7 @@ public class BigEnemyScript : MonoBehaviour
 
                 if (hitPoints <= 0)
                 {
+                    win.enabled = true;
                     isDead = true;
                     bloodParticleSystem.Play();
                     enemyRigidbody2D.AddForce(collision.gameObject.transform.position * impactForce, ForceMode2D.Impulse);

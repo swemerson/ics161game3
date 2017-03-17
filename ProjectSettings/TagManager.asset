@@ -3,38 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Bullet Spawn Right
-  - Bullet
-  - Score
-  - Death
-  - Enemy
-  - Enemy Spawn Point
-  - Dash Slider
-  - Dash Text
-  - Ammo Slider
-  - Ammo Text
-  - Ammo
-  - Big Enemy
-  - Boss Slider
-  - Enemy Bullet
-  - Dash Text P2
-  - Dash Slider P2
-  - Ammo Text P2
-  - Ammo Slider P2
-  - Lives P1
-  - Lives P2
-  - Respawn Timer P1
-  - Respawn Timer P2
-  - Player2
-  - Charge Enemy
-  - Spinner
-<<<<<<< Updated upstream
-  - UnlimitedAmmo
-  - Window
-=======
-  - Win
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX

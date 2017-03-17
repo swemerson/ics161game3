@@ -44,5 +44,10 @@ public class StartMenuScript : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			showInstructions = false;
 		}
-	}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }

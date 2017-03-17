@@ -533,7 +533,7 @@ MonoBehaviour:
   deathSpinSpeed: 1000
   destroyDelay: 4
   visionDistance: 50
-  startingHitPoints: 75
+  startingHitPoints: 1
   hitColorDuration: 0.1
   firstFireDelay: 3
   fireRate: 2
