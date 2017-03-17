@@ -1059,7 +1059,7 @@ MonoBehaviour:
   reloadDuration: 2
   bulletsPerMagazine: 20
   ammoPickupAmount: 20
-  maxAmmoStored: 200
+  maxAmmoStored: 20
   bullet: {fileID: 1520889275721594, guid: 62f3fc8c2a4cb3245979c13f60e791ff, type: 2}
   deathDelay: 2
   deathForce: 100

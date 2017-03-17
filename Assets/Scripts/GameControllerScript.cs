@@ -16,6 +16,7 @@ public class GameControllerScript : MonoBehaviour
     public int startingLives;
     public int respawnDelay;
     public float invulnerabilityDuration;
+    public Color invulnerabilityFlashColor;
     public GameObject player1;
     public GameObject player2;
 
@@ -131,9 +132,10 @@ public class GameControllerScript : MonoBehaviour
         player.SetActive(true);
         player1Script.isDead = false;
         player1Script.isInvulnerable = true;
+        StartCoroutine(InvulnerabilityFlash(player));
         yield return new WaitForSeconds(invulnerabilityDuration);
         player1Script.isInvulnerable = false;
-    }
+    }    
 
     private IEnumerator StartRespawnTimer()
     {
@@ -169,6 +171,7 @@ public class GameControllerScript : MonoBehaviour
         player.SetActive(true);
         player2Script.isDead = false;
         player2Script.isInvulnerable = true;
+        StartCoroutine(InvulnerabilityFlash(player));
         yield return new WaitForSeconds(invulnerabilityDuration);
         player2Script.isInvulnerable = false;
     }
@@ -184,6 +187,18 @@ public class GameControllerScript : MonoBehaviour
             respawnTimerP2.GetComponent<Text>().text = "Respawning in " + --counter + "...";
         }
         respawnTimerP2.SetActive(false);
+    }
+
+    IEnumerator InvulnerabilityFlash(GameObject player)
+    {
+        for (int i = 0; i < invulnerabilityDuration * 10; ++i)
+        {
+            var oldColor = player.GetComponent<Renderer>().material.color;
+            yield return new WaitForSeconds(0.05f);
+            player.GetComponent<Renderer>().material.color = invulnerabilityFlashColor;
+            yield return new WaitForSeconds(0.05f);
+            player.GetComponent<Renderer>().material.color = oldColor;
+        }
     }
 
     // Removes all enemies, and displays the Game Over message
