@@ -67,7 +67,7 @@ public class Player1ControllerScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Restart"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(0);
         }
 
         if (!isDead)

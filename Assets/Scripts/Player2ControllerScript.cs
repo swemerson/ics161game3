@@ -70,7 +70,7 @@ public class Player2ControllerScript : MonoBehaviour
         string joyRestart = (PS4Controller) ? ("PS4 Restart") : ("Joy Restart");
         if (Input.GetButtonDown(joyRestart))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(0);
         }
 
         if (!isDead)
