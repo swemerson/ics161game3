@@ -35,7 +35,7 @@ public class StartMenuScript : MonoBehaviour {
 
 		if (showInstructions) 
 		{
-			GUI.Label (new Rect(0,0,Screen.width, Screen.height), "Player 1 Controls\nMove: W, A, S, D\nDash: Space\nReload: R\nShoot: Mouse 1\nMelee: Mouse 2\nRestart: Backspace\n\nPlayer 2 Controls\nMove: Left Joystick\nDash: Left Joystick Click\nReload: Right Bumper\nShoot: Right Trigger\nMelee: Left Trigger\n\nTo return to main menu click screen", textStyle);
+			GUI.Label (new Rect(0,0,Screen.width, Screen.height), "Player 1 Controls\nMove: W, A, S, D\nDash: Space\nReload: R\nShoot: Mouse 1\nMelee: Mouse 2\nRestart: Backspace\n\nPlayer 2 Controls (PS4 controller)\nMove: Left Joystick\nDash: Left Bumper\nReload: Right Bumper\nShoot: Left Trigger\nMelee: Right Joystick Down\n\nTo return to main menu click screen", textStyle);
 		}
 	}
 
