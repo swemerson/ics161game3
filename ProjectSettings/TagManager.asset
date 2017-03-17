@@ -29,8 +29,12 @@ TagManager:
   - Player2
   - Charge Enemy
   - Spinner
+<<<<<<< Updated upstream
   - UnlimitedAmmo
   - Window
+=======
+  - Win
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

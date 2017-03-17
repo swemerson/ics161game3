@@ -23,6 +23,7 @@ public class GameControllerScript : MonoBehaviour
     private int score;
     private Text scoreBox;
     private Text deathBox;
+	private Text winBox;
 	private Text dashBox;
 	private Slider dashSlider;
     private Text ammoBox;
@@ -40,12 +41,14 @@ public class GameControllerScript : MonoBehaviour
     private GameObject respawnTimerP2;
     private Player1ControllerScript player1Script;
     private Player2ControllerScript player2Script;
+	private BigEnemyScript bigEnemyScript;
 
     void Start()
     {
         score = 0;
         scoreBox = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         deathBox = GameObject.FindGameObjectWithTag("Death").GetComponent<Text>();
+		winBox = GameObject.FindGameObjectWithTag("Win").GetComponent<Text>();
 		dashBox = GameObject.FindGameObjectWithTag("Dash Text").GetComponent<Text>();
 		dashSlider = GameObject.FindGameObjectWithTag("Dash Slider").GetComponent<Slider>();
         ammoBox = GameObject.FindGameObjectWithTag("Ammo Text").GetComponent<Text>();
@@ -56,6 +59,7 @@ public class GameControllerScript : MonoBehaviour
         ammoSliderP2 = GameObject.FindGameObjectWithTag("Ammo Slider P2").GetComponent<Slider>();
         enemySpawns = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
         deathBox.enabled = false;
+		winBox.enabled = false;
         livesP1 = startingLives;
         livesP2 = startingLives;
         livesP1Text = GameObject.FindGameObjectWithTag("Lives P1").GetComponent<Text>();
@@ -68,6 +72,7 @@ public class GameControllerScript : MonoBehaviour
         respawnTimerP2.SetActive(false);
         player1Script = GameObject.FindGameObjectWithTag("Player").GetComponent<Player1ControllerScript>();
         player2Script = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player2ControllerScript>();
+		bigEnemyScript = GameObject.FindGameObjectWithTag("Big Enemy").GetComponent<BigEnemyScript>();
     }
 
     void Update()
@@ -127,6 +132,11 @@ public class GameControllerScript : MonoBehaviour
         {
             GameOver();
         }
+
+		if (bigEnemyScript.isDead == true) 
+		{
+			GameOver ();
+		}
     }
 
     private IEnumerator RespawnPlayer(GameObject player)
@@ -166,6 +176,11 @@ public class GameControllerScript : MonoBehaviour
         {
             GameOver();
         }
+
+		if (bigEnemyScript.isDead == true) 
+		{
+			GameOver ();
+		}
     }
 
     private IEnumerator RespawnPlayer2(GameObject player)
@@ -227,7 +242,11 @@ public class GameControllerScript : MonoBehaviour
 			Destroy(enemy);
 		}
 
-        deathBox.enabled = true;
+		if (bigEnemyScript.isDead == true) {
+			winBox.enabled = true;
+		} else {
+			deathBox.enabled = true;
+		}
     }
 
 	public void Dash(float dashCooldown)
