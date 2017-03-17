@@ -215,6 +215,18 @@ public class GameControllerScript : MonoBehaviour
             Destroy(enemy);
         }
 
+		var chargeEnemies = GameObject.FindGameObjectsWithTag("Charge Enemy");
+		foreach (var enemy in chargeEnemies)
+		{
+			Destroy(enemy);
+		}
+
+		var spinners = GameObject.FindGameObjectsWithTag("Spinner");
+		foreach (var enemy in spinners)
+		{
+			Destroy(enemy);
+		}
+
         deathBox.enabled = true;
     }
 
