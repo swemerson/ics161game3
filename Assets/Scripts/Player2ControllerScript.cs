@@ -216,6 +216,22 @@ public class Player2ControllerScript : MonoBehaviour
 
             gameControllerScript.UpdateAmmoTextP2(ammoStored, ammoLoaded);
         }
+        else if (collision.gameObject.tag == "UnlimitedAmmo")
+        {
+            UnlimitedAmmoScript uas = collision.transform.parent.GetComponent<UnlimitedAmmoScript>();
+            if (uas != null && uas.CanGetAmmo())
+            {
+                ammoPickupSound.Play();
+
+                ammoStored += ammoPickupAmount;
+                if (ammoStored > maxAmmoStored)
+                {
+                    ammoStored = maxAmmoStored;
+                }
+
+                gameControllerScript.UpdateAmmoText(ammoStored, ammoLoaded);
+            }
+        }
     }
 
     void Die()

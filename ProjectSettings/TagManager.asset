@@ -29,6 +29,8 @@ TagManager:
   - Player2
   - Charge Enemy
   - Spinner
+  - UnlimitedAmmo
+  - Window
   layers:
   - Default
   - TransparentFX
